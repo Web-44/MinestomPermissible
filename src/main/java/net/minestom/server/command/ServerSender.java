@@ -17,12 +17,9 @@ import java.util.Set;
  * {@link CommandContext#getReturnData()}.
  */
 public class ServerSender implements CommandSender {
-
-    private final Set<Permission> permissions = Collections.unmodifiableSet(new HashSet<>());
-
-    @NotNull
+    
     @Override
-    public Set<Permission> getAllPermissions() {
-        return permissions;
+    public boolean hasPermission(String permission) {
+        return true;
     }
 }
