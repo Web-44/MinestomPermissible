@@ -4,13 +4,9 @@ import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
-import net.minestom.server.permission.Permission;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * Represents the console when sending a command to the server.
