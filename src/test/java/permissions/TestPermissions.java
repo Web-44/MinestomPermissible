@@ -2,6 +2,7 @@ package permissions;
 
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.entity.Player;
+import net.minestom.server.permission.PermissionHandler;
 import org.jglrxavpok.hephaistos.nbt.NBTCompound;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
