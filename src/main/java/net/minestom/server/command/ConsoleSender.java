@@ -19,8 +19,6 @@ public class ConsoleSender implements CommandSender {
     private static final PlainComponentSerializer PLAIN_SERIALIZER = PlainComponentSerializer.plain();
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleSender.class);
 
-    private final Set<Permission> permissions = new CopyOnWriteArraySet<>();
-
     @Override
     public void sendMessage(@NotNull String message) {
         LOGGER.info(message);
@@ -31,11 +29,10 @@ public class ConsoleSender implements CommandSender {
         // we don't use the serializer here as we just need the plain text of the message
         this.sendMessage(PLAIN_SERIALIZER.serialize(message));
     }
-
-    @NotNull
+    
     @Override
-    public Set<Permission> getAllPermissions() {
-        return permissions;
+    public boolean hasPermission(String permission) {
+        return true;
     }
 
     @Override
