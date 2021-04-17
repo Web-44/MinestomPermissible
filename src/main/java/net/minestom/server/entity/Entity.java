@@ -24,7 +24,6 @@ import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.instance.block.CustomBlock;
 import net.minestom.server.network.packet.server.play.*;
 import net.minestom.server.network.player.PlayerConnection;
-import net.minestom.server.permission.Permission;
 import net.minestom.server.permission.PermissionHandler;
 import net.minestom.server.potion.Potion;
 import net.minestom.server.potion.PotionEffect;
@@ -91,7 +90,6 @@ public class Entity implements Viewable, Tickable, EventHandler, DataContainer, 
     protected final Set<Player> viewers = ConcurrentHashMap.newKeySet();
     private final Set<Player> unmodifiableViewers = Collections.unmodifiableSet(viewers);
     private Data data;
-    private final Set<Permission> permissions = new CopyOnWriteArraySet<>();
 
     protected UUID uuid;
     private boolean isActive; // False if entity has only been instanced without being added somewhere
@@ -127,6 +125,8 @@ public class Entity implements Viewable, Tickable, EventHandler, DataContainer, 
      * Lock used to support #switchEntityType
      */
     private final Object entityTypeLock = new Object();
+    
+    private PermissionHandler permissionHandler;
 
     public Entity(@NotNull EntityType entityType, @NotNull UUID uuid) {
         this.id = generateId();
@@ -430,11 +430,19 @@ public class Entity implements Viewable, Tickable, EventHandler, DataContainer, 
     public void setData(@Nullable Data data) {
         this.data = data;
     }
-
-    @NotNull
+    
+    @Nullable
+    public PermissionHandler getPermissionHandler() {
+        return permissionHandler;
+    }
+    
+    public void setPermissionHandler(@Nullable PermissionHandler handler) {
+        this.permissionHandler = handler;
+    }
+    
     @Override
-    public Set<Permission> getAllPermissions() {
-        return permissions;
+    public boolean hasPermission(String permission) {
+        return permissionHandler == null ? false : permissionHandler.hasPermission(permission);
     }
 
     /**
